@@ -1,0 +1,37 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: np-server-ingress
+spec:
+  podSelector:
+    matchLabels:
+      app: server-service
+  ingress:
+    - from: []
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: np-toposervice-ingress
+spec:
+  podSelector:
+    matchLabels:
+      app: toposervice-service
+  ingress:
+    - from: []
+
+---
+# Allow trafic to weather-service to port 9090
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: np-toposervice-ingress
+spec:
+  podSelector:
+    matchLabels:
+      app: weatherservice-service
+  ingress:
+  - ports:
+      - port: 9090
+        protocol: TCP

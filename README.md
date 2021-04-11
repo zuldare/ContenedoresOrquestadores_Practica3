@@ -84,4 +84,5 @@ Creo el fichero ingress con las peticiones necesarias para la práctica:
 
 
 ## Network Policies
-Vamos a aplicar la política de menor privilegio --> vamos a crear un fichero de "denegación" de permisos general
+Vamos a aplicar la política de menor privilegio --> voy a crear un fichero de "denegación" de permisos general y posteriormente voy a ir creando un fichero de políticas de red para cada service ajustando los accesos.
+
