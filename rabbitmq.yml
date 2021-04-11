@@ -15,6 +15,10 @@ spec:
       labels:
         app: rabbitmq
     spec:
+      volumes: 
+      - name: pv-storage-rabbitmq
+        persistentVolumeClaim:
+          claimName: pv-claim-rabbitmq
       containers:
       - name: rabbitmq
         image: rabbitmq:3-management
@@ -26,6 +30,9 @@ spec:
         ports:
         - containerPort: 5672
         - containerPort: 15672
+        volumeMounts:
+        - mountPath: "/var/lib/rabbitmq" 
+          name: pv-storage-rabbitmq
 ---
 apiVersion: v1
 kind: Service

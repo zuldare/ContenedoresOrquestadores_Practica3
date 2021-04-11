@@ -24,16 +24,31 @@
    ```
    ![Resultado](./img/2_get_pvc.png)
 
-1. Añadir el almacenamiento en los deployments que sea necesario, en este caso en 
+1. Añadir el almacenamiento en los deployments que sea necesario y establecer el _binding_ entre el volumen montado y el volumen del contenedor, en este caso en 
    * mysql.yml
    * rabbitmq.yml
    * mongodb.yml
   
    Un ejemplo sería
-   ``` yml
-    volumes:
-        - name: mysql-storage
+   ``` yaml
+    spec:
+      volumes:
+        - name: pv-storage-mysql
           persistentVolumeClaim:
-            claimName: pv-volume-mysql
+            claimName: pv-claim-mysql
+      
+      containers:
+      - name: mysql
+        image: mysql:8.0.22
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: password
+        - name: MYSQL_DATABASE
+          value: eoloplantsDB
+        ports:
+        - containerPort: 3306 
+        volumeMounts:
+          - mountPath: "/var/lib/mysql"
+            name: pv-storage-mysql
    ```
    **NOTA:**  claimName, debe coincidir con el nombre de establecido en pv-claim.

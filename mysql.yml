@@ -15,6 +15,10 @@ spec:
       labels:
         app: mysql
     spec:
+      volumes:
+        - name: pv-storage-mysql
+          persistentVolumeClaim:
+            claimName: pv-claim-mysql      
       containers:
       - name: mysql
         image: mysql:8.0.22
@@ -25,10 +29,10 @@ spec:
           value: eoloplantsDB
         ports:
         - containerPort: 3306 
-      volumes:
-        - name: mysql-storage
-          persistentVolumeClaim:
-            claimName: pv-volume-mysql
+        volumeMounts:
+          - mountPath: "/var/lib/mysql"
+            name: pv-storage-mysql
+
 ---
 apiVersion: v1
 kind: Service
