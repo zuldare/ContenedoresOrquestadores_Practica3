@@ -1,0 +1,51 @@
+---
+# PV for MySQL
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-volume-mysql
+  labels:
+    type: local
+spec:
+  storageClassName: pv-mysql
+  capacity:
+    storage: 3Gi
+  accessModes:
+    - ReadWriteOnce # this allows the volume to be mounted as read-write by many nodes 
+  hostPath:
+    path: "/db/mysql"
+    
+---
+# PV for rabbitmq
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-volume-rabbitmq
+  labels:
+    type: local
+spec:
+  storageClassName: pv-rabbitmq
+  capacity:
+    storage: 3Gi
+  accessModes:
+    - ReadWriteOnce # this allows the volume to be mounted as read-write by one node
+  hostPath: 
+    path: "/rabbitmq"
+
+--- 
+# PV for mongo
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-volume-mongo
+  labels:
+    type: local
+spec:
+  storageClassName: pv-mongo
+  capacity:
+    storage: 3Gi
+  accessModes:
+    - ReadWriteOnce  # this allows the volume to be mounted as read-write by one node
+  hostPath:
+    path: "/db/mongo" 
+  

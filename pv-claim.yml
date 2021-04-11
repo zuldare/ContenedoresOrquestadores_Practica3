@@ -1,0 +1,38 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pv-claim-mysql
+spec:
+  storageClassName: pv-mysql
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+
+--- 
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pv-claim-rabbitmq
+spec:
+  storageClassName: pv-rabbitmq
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pv-claim-mongo
+spec:
+  storageClassName: pv-mongo
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
